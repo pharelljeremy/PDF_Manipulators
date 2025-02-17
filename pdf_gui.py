@@ -164,7 +164,7 @@ def add_page_numbers_action():
     # Create a dialog for page numbering options
     dialog = tk.Toplevel(root)
     dialog.title("Add Page Numbers")
-    dialog.geometry("300x250")
+    dialog.geometry("300x450")
     
     # Starting page number
     tk.Label(dialog, text="Starting Page Number:").pack(pady=5)
