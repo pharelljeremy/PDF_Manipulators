@@ -7,6 +7,7 @@ from add_watermark import add_watermark
 from pdf_utils import get_file_list, get_output_file
 from reorder_pdf import reorder_pdf
 from encrypt_pdf import encrypt_pdf, decrypt_pdf
+from add_page_numbers import add_page_numbers
 
 def main():
     print("PDF Manipulator")
@@ -18,6 +19,7 @@ def main():
     print("6. Reorder Pages")
     print("7. Encrypt PDF")
     print("8. Decrypt PDF")
+    print("9. Add Page Numbers")
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
@@ -74,6 +76,30 @@ def main():
             output = get_output_file("Enter output file name: ")
             decrypt_pdf(input_file, output, password)
             print(f"Success! Decrypted PDF saved to {output}")
+        except ValueError as e:
+            print(f"Error: {str(e)}")
+    elif choice == 9:
+        try:
+            input_file = input("Enter input file: ").strip()
+            start_number = int(input("Enter starting page number (default 1): ") or "1")
+            print("\nSelect page number position:")
+            print("1. Bottom Right")
+            print("2. Bottom Center")
+            print("3. Bottom Left")
+            pos_choice = int(input("Enter choice (1-3): "))
+            
+            positions = {
+                1: "bottom-right",
+                2: "bottom-center",
+                3: "bottom-left"
+            }
+            position = positions.get(pos_choice, "bottom-right")
+            
+            font_size = int(input("Enter font size (default 12): ") or "12")
+            output = get_output_file("Enter output file name: ")
+            
+            add_page_numbers(input_file, output, start_number, position, font_size)
+            print(f"Success! Page numbers added to PDF at {output}")
         except ValueError as e:
             print(f"Error: {str(e)}")
     else:
