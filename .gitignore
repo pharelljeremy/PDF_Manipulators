@@ -18,3 +18,4 @@ build/
 *.dmg
 *.exe
 *.app
+echo "releases/" >> .gitignore
