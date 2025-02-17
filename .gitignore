@@ -10,3 +10,11 @@ env/
 .idea/
 .vscode/
 __MACOSX/
+dist/
+build/
+*.py[cod]
+*.spec
+*.spec
+*.dmg
+*.exe
+*.app
