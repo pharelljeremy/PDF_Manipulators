@@ -8,6 +8,7 @@ from rotate_pdfs import rotate_pdf
 from add_watermark import add_watermark
 from reorder_pdf import reorder_pdf
 from encrypt_pdf import encrypt_pdf, decrypt_pdf
+from add_page_numbers import add_page_numbers
 
 def browse_files(multiple=False):
     if multiple:
@@ -155,10 +156,62 @@ def decrypt_action():
     
     tk.Button(dialog, text="Decrypt", command=process).pack(pady=10)
 
+def add_page_numbers_action():
+    input_file = browse_files()
+    if not input_file:
+        return
+    
+    # Create a dialog for page numbering options
+    dialog = tk.Toplevel(root)
+    dialog.title("Add Page Numbers")
+    dialog.geometry("300x250")
+    
+    # Starting page number
+    tk.Label(dialog, text="Starting Page Number:").pack(pady=5)
+    start_num = tk.Entry(dialog, width=10)
+    start_num.insert(0, "1")
+    start_num.pack(pady=5)
+    
+    # Position selection
+    tk.Label(dialog, text="Position:").pack(pady=5)
+    position_var = tk.StringVar(value="bottom-right")
+    positions = [
+        ("Bottom Right", "bottom-right"),
+        ("Bottom Center", "bottom-center"),
+        ("Bottom Left", "bottom-left")
+    ]
+    
+    for text, value in positions:
+        tk.Radiobutton(dialog, text=text, variable=position_var, value=value).pack()
+    
+    # Font size
+    tk.Label(dialog, text="Font Size:").pack(pady=5)
+    font_size = tk.Entry(dialog, width=10)
+    font_size.insert(0, "12")
+    font_size.pack(pady=5)
+    
+    def process():
+        try:
+            output_file = save_file()
+            if output_file:
+                add_page_numbers(
+                    input_file,
+                    output_file,
+                    start_number=int(start_num.get()),
+                    position=position_var.get(),
+                    font_size=int(font_size.get())
+                )
+                messagebox.showinfo("Success", f"Page numbers added to PDF at {output_file}")
+                dialog.destroy()
+        except ValueError as e:
+            messagebox.showerror("Error", str(e))
+    
+    tk.Button(dialog, text="Add Page Numbers", command=process).pack(pady=10)
+
 # Create the GUI
 root = tk.Tk()
 root.title("PDF Manipulator")
-root.geometry("400x700")  # Increased height to accommodate new buttons
+root.geometry("400x750")  # Increased height to accommodate new button
 
 # Buttons
 tk.Button(root, text="Merge PDFs", command=merge_action, width=20).pack(pady=10)
@@ -183,5 +236,6 @@ tk.Button(root, text="Add Watermark", command=watermark_action, width=20).pack(p
 tk.Button(root, text="Reorder Pages", command=reorder_action, width=20).pack(pady=10)
 tk.Button(root, text="Encrypt PDF", command=encrypt_action, width=20).pack(pady=10)
 tk.Button(root, text="Decrypt PDF", command=decrypt_action, width=20).pack(pady=10)
+tk.Button(root, text="Add Page Numbers", command=add_page_numbers_action, width=20).pack(pady=10)
 
 root.mainloop()
