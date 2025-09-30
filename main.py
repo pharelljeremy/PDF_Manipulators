@@ -9,6 +9,7 @@ from reorder_pdf import reorder_pdf
 from encrypt_pdf import encrypt_pdf, decrypt_pdf
 from add_page_numbers import add_page_numbers
 
+#more life and that
 def main():
     print("PDF Manipulator")
     print("1. Merge PDFs")
@@ -21,6 +22,8 @@ def main():
     print("8. Decrypt PDF")
     print("9. Add Page Numbers")
     choice = int(input("Enter your choice: "))
+
+    #modify this later
 
     if choice == 1:
         files = get_file_list("Enter PDF files to merge (comma-separated): ")
