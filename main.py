@@ -9,7 +9,7 @@ from reorder_pdf import reorder_pdf
 from encrypt_pdf import encrypt_pdf, decrypt_pdf
 from add_page_numbers import add_page_numbers
 
-#more life and that
+#more life and that wooooooooooooooooooooooooooooooow
 def main():
     print("PDF Manipulator")
     print("1. Merge PDFs")
