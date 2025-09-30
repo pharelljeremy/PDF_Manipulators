@@ -19,3 +19,4 @@ build/
 *.exe
 *.app
 echo "releases/" >> .gitignore
+PDF_manipulator.code-workspace

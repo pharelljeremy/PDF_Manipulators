@@ -10,3 +10,5 @@ def rotate_pdf(input_file, output_file, angle=90):
     
     with open(output_file, 'wb') as output_pdf:
         writer.write(output_pdf)
+
+
