@@ -6,3 +6,6 @@ def extract_text(input_file):
     for page in reader.pages:
         text += page.extract_text()
     return text
+
+
+    #burh wtf is going on
